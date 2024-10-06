@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-box">
+            <h1>Welcome to Your Dashboard, {{ session['username'] }}!</h1>
+            <h3>ESP32-CAM Stream</h3>
+            <iframe width="560" height="315" src="{{ esp32_cam_url }}" frameborder="0" allowfullscreen></iframe>
+
+            {% if video_url %}
+            <h3>Playing Video:</h3>
+            <iframe width="560" height="315" src="{{ video_url }}" frameborder="0" allowfullscreen></iframe>
+            {% endif %}
+
+            <form method="POST">
+                <div class="textbox">
+                    <input type="text" name="video_url" placeholder="Paste YouTube link here" required>
+                </div>
+                <button class="btn" type="submit" name="play_video">Play Video</button>
+            </form>
+
+            <a class="logout-link" href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
